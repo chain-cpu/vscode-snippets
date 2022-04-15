@@ -1,0 +1,189 @@
+{
+	"Minimal starknet contract snippet": {
+		"prefix": "__cairoinit",
+		"body": [
+			"# Declare this file as a StarkNet contract.",
+			"%lang starknet",
+			"",
+			"from starkware.cairo.common.cairo_builtins import HashBuiltin",
+			""
+		],
+		"description": ""
+	},
+	"Cairo Simple Var": {
+		"prefix": "__cairosimplestorage",
+		"body": [
+			"",
+			"# Define a storage variable.",
+			"@storage_var",
+			"func ${1:balance}() -> (res : felt):",
+			"end",
+			"",
+			"# $2 the balance by the given ${3:amount}.",
+			"@external",
+			"func ${2:increase}_$1{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        $3 : felt):",
+			"    $1.write($3)",
+			"    return ()",
+			"end",
+			"",
+			"# Returns the current $1",
+			"@view",
+			"func get_$1{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (",
+			"        res : felt):",
+			"    let (res) = $1.read()",
+			"    return (res)",
+			"end",
+			""
+		],
+		"description": ""
+	},
+	"Cairo function": {
+		"prefix": "__cairofunction",
+		"body": [
+			"",
+			"@${1:external}",
+			"func ${2:increase_name}{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        ${3:amount : felt}):",
+			"    ${4:name.write(amount)}",
+			"    return ()",
+			"end",
+			"",
+			""
+		]
+	},
+	"Cairo Getter": {
+		"prefix": "__cairogetter",
+		"body": [
+			"",
+			"# Returns the current $1",
+			"@view",
+			"func get_${1:balance}{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}($2) -> (",
+			"        ${3:res : felt}):",
+			"    let (res) = ${4:$1.read()}",
+			"    return (res)",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	},
+	"Cairo setter": {
+		"prefix": "__cairosetter",
+		"body": [
+			"",
+			"# increase the balance by the given amount.",
+			"@external",
+			"func ${1:increase}_${2:balance}{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        ${3:amount : felt}):",
+			"    $2.write(amount)",
+			"    return ()",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	},
+	"Cairo Storage": {
+		"prefix": "__cairostorage",
+		"body": [
+			"",
+			"@storage_var",
+			"func ${1:balance}($2) -> (res : ${3:felt}):",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	},
+	"import caller address": {
+		"prefix": "__import_cairocalleraddress",
+		"body": [
+			"",
+			"from starkware.starknet.common.syscalls import get_caller_address"
+		],
+		"description": ""
+	},
+	"Import get_tx_info": {
+		"prefix": "__import_cairogettxinfo",
+		"body": [
+			"from starkware.starknet.common.syscalls import get_tx_info",
+			""
+		]
+	},
+	"Starknet common syscalls": {
+		"prefix": "__import_cairosyscalls",
+		"body": [
+			"from starkware.starknet.common.syscalls import (",
+			"    get_tx_info,",
+			"    get_block_number,",
+			"    get_block_timestamp,",
+			")",
+			""
+		],
+		"description": ""
+	},
+	"Sample Cairo Contract": {
+		"prefix": "__cairosamplecontract",
+		"body": [
+			"# Declare this file as a StarkNet contract.",
+			"%lang starknet",
+			"",
+			"from starkware.cairo.common.cairo_builtins import HashBuiltin",
+			"",
+			"# Define a storage variable.",
+			"@storage_var",
+			"func balance() -> (res : felt):",
+			"end",
+			"",
+			"# Increases the balance by the given amount.",
+			"@external",
+			"func increase_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        amount : felt):",
+			"    let (res) = balance.read()",
+			"    balance.write(res + amount)",
+			"    return ()",
+			"end",
+			"",
+			"# Returns the current balance.",
+			"@view",
+			"func get_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (",
+			"        res : felt):",
+			"    let (res) = balance.read()",
+			"    return (res)",
+			"end",
+			""
+		],
+		"description": ""
+	},
+	"Cairo View Function": {
+		"prefix": "__cairoviewfunction",
+		"body": [
+			"",
+			"@view",
+			"func ${1:get_balance}{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        $2) -> (res: ${3:felt}): ",
+			"    let (res) = ${4:balance.read()}",
+			"    return (res=res)",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	},
+	"Cairo constructor function": {
+		"prefix": "___cairoconstructor",
+		"body": [
+			"",
+			"@constructor",
+			"func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        $1):",
+			"    $2",
+			"    return ()",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	}
+}
