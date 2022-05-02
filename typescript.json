@@ -1,0 +1,214 @@
+{
+  "Create Anchor Keypair": {
+    "prefix": "__anchorkeygen",
+    "body": [
+      "const ${1:counterKeyPair} = anchor.web3.Keypair.generate();"
+    ],
+    "description": ""
+  },
+  "Invoke Anchor Method": {
+    "prefix": "__anchorinvoke",
+    "body": [
+      "await program.methods.${1: initialize } ($2)",
+      "\t.accounts({",
+      "\t\t${3: counter: counterKeyPair.publicKey, }",
+      "\t})",
+      "\t.signers([${4: counterKeyPair }])",
+      "\t.rpc();\t"
+    ],
+    "description": ""
+  },
+  "Fetch Anchor Account": {
+    "prefix": "__anchorfetch",
+    "body": [
+      "let ${1:counter} = await program.account.${2:counter}.fetch(${3:counterKeyPair}.publicKey);"
+    ],
+    "description": ""
+  },
+  "Anchor Local Provider": {
+    "prefix": "__anchorlocalprovider",
+    "body": [
+      "const provider = anchor.AnchorProvider.local();"
+    ],
+    "description": ""
+  },
+  "__declareMint": {
+    "prefix": "__dcMint",
+    "description": "",
+    "body": [
+      "let mint${1:A} = null as Token;"
+    ]
+  },
+  "__dctkact": {
+    "prefix": "__dctoken",
+    "description": "",
+    "body": [
+      "let ${1:initializer}TokenAccount${2:A} = null;"
+    ]
+  },
+  "__dcpda": {
+    "prefix": "__dcpda",
+    "description": "",
+    "body": [
+      "let ${1:vault_account}_pda = null;"
+    ]
+  },
+  "__dcbump": {
+    "prefix": "__dcbump",
+    "description": "",
+    "body": [
+      "let ${1:vault_account}_bump = null;"
+    ]
+  },
+  "__dcProgram": {
+    "prefix": "__dcProgram",
+    "description": "",
+    "body": [
+      "const program = anchor.workspace.${1:BuyToken} as Program<$1>;"
+    ]
+  },
+  "__setProvider": {
+    "prefix": "__setProvider",
+    "description": "",
+    "body": [
+      "anchor.setProvider(anchor.Provider.env());",
+      ""
+    ]
+  },
+  "__genkey": {
+    "prefix": "__genkey",
+    "description": "",
+    "body": [
+      "const ${1:escrowAccount} = anchor.web3.Keypair.generate();"
+    ]
+  },
+  "__airdrop": {
+    "prefix": "__airdrop",
+    "description": "",
+    "body": [
+      "// Airdropping tokens to a ${1:payer}.",
+      "    await provider.connection.confirmTransaction(",
+      "      await provider.connection.requestAirdrop($1.publicKey, ${2:1000000000}),",
+      "      \"processed\"",
+      "    );",
+      ""
+    ]
+  },
+  "__fund": {
+    "prefix": "__fund",
+    "description": "",
+    "body": [
+      "    await provider.send(",
+      "      (() => {",
+      "        const tx = new Transaction();",
+      "        tx.add(",
+      "          SystemProgram.transfer({",
+      "            fromPubkey: ${1:payer}.publicKey,",
+      "            toPubkey: initializerMainAccount.publicKey,",
+      "            lamports: 100000000,",
+      "          }),",
+      "          // ... Can add another transfer here",
+      "        );",
+      "        return tx;",
+      "      })(),",
+      "      [$1]",
+      "    );",
+      ""
+    ]
+  },
+  "__crtMint": {
+    "prefix": "__crtMint",
+    "description": "",
+    "body": [
+      "mint${1:A} = await Token.createMint(",
+      "      provider.connection,",
+      "      ${2:payer},",
+      "      ${3:mintAuthority}.publicKey,",
+      "      null,",
+      "      ${4:0},",
+      "      TOKEN_PROGRAM_ID",
+      "    );"
+    ]
+  },
+  "__crttokenaccount": {
+    "prefix": "__crttokenaccount",
+    "description": "",
+    "body": [
+      "${1:initializer}TokenAccount${2:A} = await mint$2.createAccount($1MainAccount.publicKey);"
+    ]
+  },
+  "__dcmainaccount": {
+    "prefix": "__dcmainaccount",
+    "description": "",
+    "body": [
+      "const ${1:taker}MainAccount = anchor.web3.Keypair.generate();",
+      ""
+    ]
+  },
+  "__mintto": {
+    "prefix": "__mintto",
+    "description": "",
+    "body": [
+      "await mint${1:A}.mintTo(",
+      "      ${2:initializer}TokenAccountA,",
+      "      ${3:mintAuthority}.publicKey,",
+      "      [$3],",
+      "      ${4:initializerAmount}",
+      "    );"
+    ]
+  },
+  "__getaccountinfo": {
+    "prefix": "__getaccountinfo",
+    "description": "",
+    "body": [
+      "let _${1:taker}TokenAccount${2:B} = await mint$2.getAccountInfo($1TokenAccoun$2);"
+    ]
+  },
+  "__getPda": {
+    "prefix": "__getPda",
+    "description": "",
+    "body": [
+      "const [${1:_vault_account}_pda, $1_bump] = await PublicKey.findProgramAddress(",
+      "      [Buffer.from(anchor.utils.bytes.utf8.encode(${2:\"token-seed\"}))],",
+      "      program.programId",
+      "    );"
+    ]
+  },
+  "__fetchaccount": {
+    "prefix": "__fetchaccount",
+    "description": "",
+    "body": [
+      "await program.account.${1:bottleStats}.fetch(${2:bottlestats_pda})"
+    ]
+  },
+  "__asyncit": {
+    "prefix": "__asyncit",
+    "description": "",
+    "body": [
+      "it(\"$1\", async () => {",
+      "  $2",
+      "})"
+    ]
+  },
+  "__tokenprogram": {
+    "prefix": "__tokenprogram",
+    "description": "",
+    "body": [
+      "tokenProgram: TOKEN_PROGRAM_ID,"
+    ]
+  },
+  "__rent": {
+    "prefix": "__rent",
+    "description": "",
+    "body": [
+      "rent: anchor.web3.SYSVAR_RENT_PUBKEY,"
+    ]
+  },
+  "__systemprogram": {
+    "prefix": "__systemprogram",
+    "description": "",
+    "body": [
+      "systemProgram: anchor.web3.SystemProgram.programId,"
+    ]
+  }
+}

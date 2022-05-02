@@ -97,7 +97,7 @@
 		"description": ""
 	},
 	"import caller address": {
-		"prefix": "__import_cairocalleraddress",
+		"prefix": "__icairocalleraddress",
 		"body": [
 			"",
 			"from starkware.starknet.common.syscalls import get_caller_address"
@@ -105,19 +105,21 @@
 		"description": ""
 	},
 	"Import get_tx_info": {
-		"prefix": "__import_cairogettxinfo",
+		"prefix": "__icairogettxinfo",
 		"body": [
 			"from starkware.starknet.common.syscalls import get_tx_info",
 			""
 		]
 	},
 	"Starknet common syscalls": {
-		"prefix": "__import_cairosyscalls",
+		"prefix": "__icairosyscalls",
 		"body": [
 			"from starkware.starknet.common.syscalls import (",
 			"    get_tx_info,",
 			"    get_block_number,",
 			"    get_block_timestamp,",
+			"    get_contract_address,",
+			"    get_caller_address,",
 			")",
 			""
 		],
@@ -182,6 +184,53 @@
 			"    return ()",
 			"end",
 			"",
+			""
+		],
+		"description": ""
+	},
+	"Cairo external function": {
+		"prefix": "__cairoexternalfunction",
+		"body": [
+			"",
+			"@external",
+			"func ${1:increase_name}{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(",
+			"        ${2:amount : felt}):",
+			"    ${3:name.write(amount)}",
+			"    return ()",
+			"end",
+			"",
+			""
+		],
+		"description": ""
+	},
+	"Import alloc": {
+		"prefix": "__icairoalloc",
+		"body": [
+			"from starkware.cairo.common.alloc import alloc",
+			""
+		],
+		"description": ""
+	},
+	"Import assertnn": {
+		"prefix": "__icairo_assertnn",
+		"body": [
+			"from starkware.cairo.common.math import assert_nn",
+			""
+		],
+		"description": ""
+	},
+	"Import MSG2L1": {
+		"prefix": "__icairo_l1",
+		"body": [
+			"from starkware.starknet.common.messages import send_message_to_l1",
+			""
+		],
+		"description": ""
+	},
+	"Import MsgToL1": {
+		"prefix": "__icairol1",
+		"body": [
+			"from starkware.starknet.common.messages import send_message_to_l1",
 			""
 		],
 		"description": ""

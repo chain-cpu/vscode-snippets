@@ -1,0 +1,21 @@
+{
+  "__execute": {
+    "prefix": "__exec",
+    "description": "",
+    "body": [
+      "await ctx.execute(",
+      "    \"${1:alice}\", ",
+      "    ctx.${2:vault_lib}.contract_address,",
+      "    '${3:setComptrolleur}',",
+      "    [$4]",
+      ")"
+    ]
+  },
+  "__call": {
+    "prefix": "__call",
+    "description": "",
+    "body": [
+      "${1:_totalSupply} = (await ctx.${2:vault_lib}.${3:getSharesTotalSupply}($4).call()).result.${5:sharesTotalSupply_}"
+    ]
+  }
+}

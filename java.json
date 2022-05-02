@@ -1,6 +1,7 @@
 {
 	"undefined": {
 		"body": [
+			"",
 			"    const ${1:counterKeyPair} = anchor.web3.Keypair.generate();",
 			""
 		]

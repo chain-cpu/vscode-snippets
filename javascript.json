@@ -1,0 +1,11 @@
+{
+	"Create New Solana Keypair Using Anchor.web3": {
+		"prefix": "__anchorjskeygen",
+		"body": [
+			"",
+			"    const ${1:counterKeyPair} = anchor.web3.Keypair.generate();",
+			""
+		],
+		"description": ""
+	}
+}

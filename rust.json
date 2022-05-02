@@ -1,0 +1,77 @@
+{
+  "Anchor method": {
+    "prefix": "__anchormethod",
+    "description": "",
+    "body": [
+      "pub fn ${1:increase}(ctx: Context<${2:IncreaseCounter}>,$3) -> Result<()> {",
+      "    $4",
+      "    Ok(())",
+      "}"
+    ]
+  },
+  "Create Anchor Init Struct": {
+    "prefix": "__anchorinitstruct",
+    "body": [
+      "",
+      "",
+      "#[derive(Accounts)]",
+      "pub struct ${1:Initialize}<'info> {",
+      "    #[account(${2:init, payer = user, space= 8})]",
+      "    pub ${3:counter}: Account<'info, ${4:Counter}>,",
+      "    pub system_program: Program<'info, System>,",
+      "    #[account(mut)]",
+      "    pub ${5:user}: Signer<'info>,",
+      "}",
+      "",
+      "",
+      ""
+    ],
+    "description": ""
+  },
+  "Create Anchor Mut Struct": {
+    "prefix": "__anchormutstruct",
+    "body": [
+      "",
+      "#[derive(Accounts)]",
+      "pub struct ${1:IncreaseCounter}<'info> {",
+      "    #[account(${2:mut})]",
+      "    pub ${3:counter}: Account<'info, ${4:Counter}>,",
+      "    pub authority: Signer<'info>,",
+      "}",
+      "",
+      "",
+      ""
+    ],
+    "description": ""
+  },
+  "Create Anchor Simple Account": {
+    "prefix": "__anchorsimpleaccount",
+    "body": [
+      "",
+      "#[account]",
+      "pub struct ${1:Counter} {",
+      "    ${2:pub count: u64},",
+      "}",
+      "",
+      ""
+    ],
+    "description": ""
+  },
+  "__impl": {
+    "prefix": "__impl",
+    "description": "",
+    "body": [
+      "impl<'info> ${1:Initialize}<'info> {",
+      "    $2",
+      "}"
+    ]
+  },
+  "__getpda": {
+    "prefix": "__getpda",
+    "description": "",
+    "body": [
+      "let (${1:vault_authority}, _$1_bump) =",
+      "    Pubkey::find_program_address(&[${2:VAULT}_PDA_SEED], ctx.program_id);"
+    ]
+  }
+}
